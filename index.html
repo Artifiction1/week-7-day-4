@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+  <meta name="generator" content="Jekyll v3.8.5" />
+  <title>Album example · Bootstrap</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+  <title>proudcts</title>
+  <style>
+    a {
+      color: white
+    }
+
+    .container {
+      max-width: 1400px;
+      margin-left: auto;
+      margin-left: auto;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">product add</a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="row">
+
+    </div>
+  </div>
+  <script>
+    const endpoint = "https://striveschool-api.herokuapp.com/api/product/"
+    async function link() {
+      const resolve = await fetch("https://striveschool-api.herokuapp.com/api/product/", {
+        headers: {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmE1ZDRlMzMzODEzZjAwMTUwZGRkZjkiLCJpYXQiOjE2NTUwNDc1MzAsImV4cCI6MTY1NjI1NzEzMH0.gbUL-FtkjGA-E-A6SNkSJFyOWi2xggQ-UHbEiQUsYPM"
+        }
+
+      })
+      const result = await resolve.json()
+      const fillTheScreen = () => {
+        let parent = document.querySelector('.container > .row')
+        for (let i = 0; i < result.length; i++) {
+          let kid = document.createElement('div');
+          kid.innerHTML =`
+          <div class="card" style="width: 18rem;">
+            <img src="${result[i].imageUrl}" class="card-img-top" alt="..."></img>
+              <div class="card-body">
+                <h5 class="card-title">${result[i].name}</h5>
+                <p class="card-text">${result[i].description}</p>
+                <div class="d-flex justify-content-between"><a href="#" class="btn btn-primary">${result[i].price}$</a>
+                <label>${result[i].brand}<label><div>
+              </div>
+          </div>
+          `
+          parent.appendChild(kid)
+        }
+      }
+      fillTheScreen()
+      console.log(result)
+
+    }
+    window.onload = link()
+  </script>
+</body>
+
+</html>
