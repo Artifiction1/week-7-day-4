@@ -51,16 +51,16 @@
           <div class="col-8 d-flex justify-content-between mt-2">   
                 <p class="card-title">${result[i].name}</p>
                 <p class="card-text">${result[i].description}</p>
-                <button .class="deleteBtn" value=${result[i]._id}>delete</button>
+                <button class="deleteBtn" value=${result[i]._id}>delete</button>
               
           </div>
           `
          
           parent.appendChild(kid)
         }
- let deleteBtn = document.querySelectorAll(".deleteBtn")
-          deleteBtn.forEach(elm => {
-            elm.addEventListener('click', function(e){
+        let deleteBtn = document.querySelectorAll(".deleteBtn")
+          deleteBtn.forEach(element => {
+            element.addEventListener('click', function(e){
                 let value = e.target.value
                 console.log(value)
                 delObject(value)
