@@ -15,6 +15,65 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="container mt-5">
+        <div class="rows">
+
+        </div>
+        
+</div>
+        <script>
+
+            const endpoint = "https://striveschool-api.herokuapp.com/api/product/"
+            const delObject = async(event) => {
+            const response = await fetch(endpoint + event, {
+                    method: "DELETE",
+                    headers:  {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmE1ZDRlMzMzODEzZjAwMTUwZGRkZjkiLCJpYXQiOjE2NTUwNDc1MzAsImV4cCI6MTY1NjI1NzEzMH0.gbUL-FtkjGA-E-A6SNkSJFyOWi2xggQ-UHbEiQUsYPM"
+            }
+                })
+
+                const deletedObj = await response.json()
+        }
+
+            
+    async function link() {
+      const resolve = await fetch("https://striveschool-api.herokuapp.com/api/product/", {
+        headers: {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmE1ZDRlMzMzODEzZjAwMTUwZGRkZjkiLCJpYXQiOjE2NTUwNDc1MzAsImV4cCI6MTY1NjI1NzEzMH0.gbUL-FtkjGA-E-A6SNkSJFyOWi2xggQ-UHbEiQUsYPM"
+        }
+
+      })
+      const result = await resolve.json()
+      const fillTheScreen = () => {
+        let parent = document.querySelector('.container > .rows')
+        for (let i = 0; i < result.length; i++) {
+          let kid = document.createElement('div');
+          kid.innerHTML =`
+          <div class="col-8 d-flex justify-content-between mt-2">   
+                <p class="card-title">${result[i].name}</p>
+                <p class="card-text">${result[i].description}</p>
+                <button .class="deleteBtn" value=${result[i]._id}>delete</button>
+              
+          </div>
+          `
+         
+          parent.appendChild(kid)
+        }
+ let deleteBtn = document.querySelectorAll(".deleteBtn")
+          deleteBtn.forEach(elm => {
+            elm.addEventListener('click', function(e){
+                let value = e.target.value
+                console.log(value)
+                delObject(value)
+            },false)
+          })
+      }
+      fillTheScreen()
+      console.log(result)
+
+    }
+    window.onload = link()
+        </script>
+    
     
 </body>
 </html>
